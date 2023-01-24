@@ -3,27 +3,30 @@ package practice;
 import java.util.Locale;
 
 public class MarketProductV2 {
-    private String name;
-    private double price;
+    public String name;
+    private double unitPrice;
     private double amount;
 
-    public MarketProductV2(String name, double price){
+    private double inventoryValue;
+
+    public MarketProductV2(String name, double unitPrice){
         this.name = name;
-        this.price = price;
+        this.unitPrice = unitPrice;
     }
-    public MarketProductV2(String name, double price, double amount){
+    public MarketProductV2(String name, double unitPrice, double amount){
         this.name = name;
-        this.price = price;
+        this.unitPrice = unitPrice;
         this.amount = amount;
+        this.inventoryValue = this.unitPrice * this.amount;
     }
     private String getName(){
         return this.name;
     }
-    private void setPrice(double price){
-        this.price = price;
+    private void setPrice(double unitPrice){
+        this.unitPrice = unitPrice;
     }
-    private double getPrice(){
-        return this.price;
+    private double getUnitPrice(){
+        return this.unitPrice;
     }
     private void setAmount(double amount){
         this.amount = amount;
@@ -32,19 +35,24 @@ public class MarketProductV2 {
         return this.amount;
     }
 
+    public double getInventoryValue(){
+        return this.inventoryValue;
+    }
+
+    public void status(){
+        System.out.println("Nome do produto: " + this.getName());
+        System.out.println("Preço unitario: " + this.getUnitPrice());
+        System.out.println("Quantidade em estoque: " + this.getAmount());
+        System.out.println("Valor em estoque: R$" + this.getInventoryValue());
+    }
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.US);
 
-        MarketProductV2 product = new MarketProductV2("Banana",1.50);
+        MarketProductV2 product = new MarketProductV2("Banana",1.50, 200);
+        product.status();
+        MarketProductV2 product2 = new MarketProductV2("Chocolate",3.50, 100.0);
+        product2.status();
 
-        System.out.println("Product name: " + product.getName());
-        System.out.println("Product price: " + product.getPrice());
-        System.out.println("Product amount: " + product.getAmount());
-        System.out.println("Can also be created with amount: ");
-        MarketProductV2 product2 = new MarketProductV2("Apple",3.50, 20.0);
-        System.out.println("Product name: " + product2.getName());
-        System.out.println("Product price: " + product2.getPrice());
-        System.out.println("Product amount: " + product2.getAmount());
     }
 }
